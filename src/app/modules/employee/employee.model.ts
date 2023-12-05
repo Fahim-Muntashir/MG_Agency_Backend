@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { Address, Employee, Employee, Name } from "./employee.interface";
+import { Address, Employee,  Name } from "./employee.interface";
 
 const NameSchema = new Schema<Name>(
     {
@@ -74,4 +74,6 @@ const employeeSchema = new Schema<Employee>({
 
 })
 
-const Employee = model<Employee>('Employee', employeeSchema);
+const EmployeeModel = model<Employee>('Employee', employeeSchema);
+
+export default EmployeeModel;
