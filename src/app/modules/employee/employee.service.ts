@@ -6,6 +6,20 @@ const createEmployeeIntoDb = async (employee:Employee) => {
     return result;
 }
 
+
+const getAllEmployeeFromDB = async () => {
+    const result = await EmployeeModel.find();
+    return result;
+}
+
+const getSingleEmployee = async (id: string) => {
+    const result = await EmployeeModel.findOne({ id })
+    return result;
+}
+
+
 export const EmployeeServices = {
     createEmployeeIntoDb,
+    getAllEmployeeFromDB,
+    getSingleEmployee
 }
