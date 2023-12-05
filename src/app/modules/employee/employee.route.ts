@@ -4,4 +4,6 @@ import { EmployeeControllers } from "./employee.controller";
 const router = express.Router();
 
 // will call controller function
-router.post('/create-employee',EmployeeControllers.createEmployee)
+router.post('/create-employee', EmployeeControllers.createEmployee)
+
+export const EmployeeRoutes = router;

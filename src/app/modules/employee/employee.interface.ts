@@ -9,15 +9,16 @@ export type Address = {
 }
 
 export type Employee = {
+    id: string;
     name: Name;
     age: string;
     dateOfBirth: string;
     email: string;
     address: Address;
     phoneNumber: string;
-    position: string,
+    position: string;
     gender: 'Male' | 'Female';
-    bloodGroup: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
+    bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
     isActive: "active" | 'blocked';
     profile: string;
     hobby: string;

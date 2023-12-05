@@ -5,8 +5,6 @@ const createEmployee = async (req: Request, res: Response) => {
     try {
         const employee = req.body;
     const result = await EmployeeServices.createEmployeeIntoDb(employee)
-        
-
         res.status(200).json({
             success: true,
             message: "Employee is Created Successfully",

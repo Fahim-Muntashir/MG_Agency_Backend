@@ -1,32 +1,34 @@
 import { Schema, model } from "mongoose";
 import { Address, Employee,  Name } from "./employee.interface";
 
-const NameSchema = new Schema<Name>(
+const nameSchema = new Schema<Name>(
     {
         firstName: {
-            type: String,
-            required:true,
-        },
-        lastName: {
-            type: String,
-            required:true,
+                type: String,
+                required: true,
+            },
+            lastName: {
+                type: String,
+                required: true,
+            }
         }
-    }
-)
+    )
 
-const AddressSchema = new Schema<Address>({
+const addressSchema = new Schema<Address>({
     country: {
         type: String,
-        required:true,
+        required: true,
     },
     city: {
         type: String,
-        requierd:true,
+        required: true,
     },
-})
+});
+
 
 const employeeSchema = new Schema<Employee>({
-    name:NameSchema,
+    id:{type:String},
+    name:nameSchema,
     age: {
         type: String,
         required: true,
@@ -39,7 +41,7 @@ const employeeSchema = new Schema<Employee>({
         type: String,
         required: true,
     },
-    address: AddressSchema,
+    address: addressSchema,
     phoneNumber: {
         type: String,
         required:true,
@@ -66,7 +68,7 @@ const employeeSchema = new Schema<Employee>({
     },
     profile: {
         type: String,
-        requried:true,
+        required:true,
     },
     hobby: {
         type: String,
@@ -74,6 +76,5 @@ const employeeSchema = new Schema<Employee>({
 
 })
 
-const EmployeeModel = model<Employee>('Employee', employeeSchema);
+export const EmployeeModel = model<Employee>('Employee', employeeSchema);
 
-export default EmployeeModel;
