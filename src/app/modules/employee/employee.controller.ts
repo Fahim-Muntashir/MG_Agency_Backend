@@ -3,8 +3,8 @@ import { EmployeeServices } from "./employee.service";
 
 const createEmployee = async (req: Request, res: Response) => {
     try {
-        const employee = req.body;
-    const result = await EmployeeServices.createEmployeeIntoDb(employee)
+        const {employee:employeeData} = req.body;
+    const result = await EmployeeServices.createEmployeeIntoDb(employeeData)
         res.status(200).json({
             success: true,
             message: "Employee is Created Successfully",
