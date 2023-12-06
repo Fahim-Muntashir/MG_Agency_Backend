@@ -1,15 +1,33 @@
 import { Schema, model } from "mongoose";
 import { Address, Employee,  Name } from "./employee.interface";
+import validator from "validator";
+
+
 
 const nameSchema = new Schema<Name>(
     {
         firstName: {
                 type: String,
-                required: [true,"First name is must me included!"],
+            required: [true, "First name is must me included!"],
+            trim:true,
+                maxlength:[20,'First Name lenth can not be more than 20 carector'],
+            validate: {
+               validator: function (value:string) {
+                    const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
+                    return firstNameStr === value;
+                },
+                message:'{VALUE} is not in capitalize format'
+            }
+        
             },
             lastName: {
                 type: String,
                 required: true,
+                validate: {
+                    validator: (value: string) => 
+                        validator.isAlpha(value),
+                        message: '{VALUE} is not value' 
+                }
             }
         }
     )
@@ -17,11 +35,11 @@ const nameSchema = new Schema<Name>(
 const addressSchema = new Schema<Address>({
     country: {
         type: String,
-        required: true,
+        required: [true, "Country is required!"],
     },
     city: {
         type: String,
-        required: true,
+        required: [true, "City is required!"],
     },
 });
 
@@ -29,28 +47,32 @@ const addressSchema = new Schema<Address>({
 const employeeSchema = new Schema<Employee>({
     id: {
         type: String,
-        requred:true,
+        required: [true, "Employee ID is required!"],
         unique:true,
     },
     name: {
         type:nameSchema,
-        required:true,
+        required: [true, "Name is required!"],
     },
     age: {
         type: String,
-        required: true,
+        required: [true, "Age is required!"],
     },
     dateOfBirth: {
         type: String,
-        required:true,
+        required: [true, "Gender is required!"],
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is required!"],
+        validate: {
+            validator: (value: string) => validator.isEmail(value),
+            message:'{VALUE} is not a valid type'
+        }
     },
     address: {
         type: addressSchema,
-        required:true,
+        required: [true, "Address is required!"],
     },
     phoneNumber: {
         type: String,
@@ -59,7 +81,7 @@ const employeeSchema = new Schema<Employee>({
     ,
     position: {
         type: String,
-        required: true,
+        required: [true, "Position is required!"],
     },
     gender: {
         type: String,
@@ -68,7 +90,7 @@ const employeeSchema = new Schema<Employee>({
             message:"The gender should be can only be one of the following : 'male', 'female','other' "
         
         },
-        required:true,
+        required: [true, "Gender is required!"],
     },
     bloodGroup: {
         type: String,
@@ -82,7 +104,7 @@ const employeeSchema = new Schema<Employee>({
     },
     profile: {
         type: String,
-        required:true,
+        required: [true, "Gender is required!"],
     },
     hobby: {
         type: String,
