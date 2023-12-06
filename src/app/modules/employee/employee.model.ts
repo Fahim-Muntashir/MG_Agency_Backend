@@ -5,7 +5,7 @@ const nameSchema = new Schema<Name>(
     {
         firstName: {
                 type: String,
-                required: true,
+                required: [true,"First name is must me included!"],
             },
             lastName: {
                 type: String,
@@ -27,8 +27,15 @@ const addressSchema = new Schema<Address>({
 
 
 const employeeSchema = new Schema<Employee>({
-    id:{type:String},
-    name:nameSchema,
+    id: {
+        type: String,
+        requred:true,
+        unique:true,
+    },
+    name: {
+        type:nameSchema,
+        required:true,
+    },
     age: {
         type: String,
         required: true,
@@ -41,7 +48,10 @@ const employeeSchema = new Schema<Employee>({
         type: String,
         required: true,
     },
-    address: addressSchema,
+    address: {
+        type: addressSchema,
+        required:true,
+    },
     phoneNumber: {
         type: String,
         required:true,
@@ -53,7 +63,11 @@ const employeeSchema = new Schema<Employee>({
     },
     gender: {
         type: String,
-        enum: ["Male", "Female"],
+        enum: {
+            values: ["Male", "Female", "other"],
+            message:"The gender should be can only be one of the following : 'male', 'female','other' "
+        
+        },
         required:true,
     },
     bloodGroup: {
